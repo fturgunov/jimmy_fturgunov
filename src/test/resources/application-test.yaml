@@ -1,0 +1,47 @@
+
+spring:
+  messages:
+    encoding: UTF-8
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${JIMMY_FT_RDS_DB_NAME:jimmy_ft}?currentSchema=test
+    username: ${JIMMY_FT_RDS_USERNAME:jimmy_ft}
+    password: ${JIMMY_FT_RDS_PASSWORD:testpwd1}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL92Dialect
+        show_sql: false
+        jdbc.lob.non_contextual_creation: true
+        default_schema: test
+#        format_sql: true
+#        generate_statistics: true
+        jdbc:
+          time_zone: UTC
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    enabled: true
+    user: ${spring.datasource.username}
+    default_schema: test
+    change-log: classpath:db/liquibase-changelog.xml
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  sql:
+    init:
+      encoding: UTF-8
+
+
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+  servlet.encoding.charset: UTF-8
+
+logging:
+  level:
+    org.apache.fop: ERROR
+    org.springframework: WARN
+    com.amazonaws.services.simpleemail: DEBUG
+

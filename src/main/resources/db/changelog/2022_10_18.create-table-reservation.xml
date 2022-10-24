@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="2022_10_18.create-table-reservation" author="farruh.turgunov@gmail.com">
+        <sql>
+            CREATE TABLE reservation
+            (
+            id BIGSERIAL NOT NULL,
+            car_id BIGINT REFERENCES car(id) NOT NULL,
+            start_date_time TIMESTAMP NOT NULL,
+            end_date_time TIMESTAMP NOT NULL,
+            CONSTRAINT pk_reservation PRIMARY KEY (id)
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>
